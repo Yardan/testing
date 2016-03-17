@@ -5,17 +5,8 @@ use app\models\User;
 
 require(__DIR__.'/_bootstrap.php');
 
-class TestUser
+class TestCase
 {
-    public function testValidateEmptyValues()
-    {
-        $user = new User();
-
-        $this->assertFalse($user->validate(), 'model is not valid');
-        $this->assertArrayHasKey('username', $user->getErrors(), 'check username error');
-        $this->assertArrayHasKey('email', $user->getErrors(), 'check email error');
-    }
-
     protected function assert($condition, $message = '')
     {
         echo $message;
@@ -44,5 +35,17 @@ class TestUser
     }
 }
 
-$test = new TestUser();
+class UserTest extends TestCase
+{
+    public function testValidateEmptyValues()
+    {
+        $user = new User();
+
+        $this->assertFalse($user->validate(), 'model is not valid');
+        $this->assertArrayHasKey('username', $user->getErrors(), 'check username error');
+        $this->assertArrayHasKey('email', $user->getErrors(), 'check email error');
+    }
+}
+
+$test = new UserTest();
 $test->testValidateEmptyValues();
