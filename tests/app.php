@@ -11,28 +11,17 @@ class TestUser
     {
         $user = new User();
 
-        echo 'validate empty username and email';
+        $this->assert($user->validate() == false, 'model is not valid');
+        $this->assert(array_key_exists('username', $user->getErrors()), 'check username error');
+        $this->assert(array_key_exists('email', $user->getErrors()), 'check email error');
+    }
 
-        if($user->validate() == false){
-            echo ' Ok'. PHP_EOL;
-        } else {
-            echo ' Fail'. PHP_EOL;
-            exit();
-        }
+    protected function assert($condition, $message = '')
+    {
+        echo $message;
 
-        echo 'check empty username error';
-
-        if(array_key_exists('username', $user->getErrors())){
-            echo ' Ok'. PHP_EOL;
-        } else {
-            echo ' Fail'.PHP_EOL;
-            exit();
-        }
-
-        echo 'check empty email error';
-
-        if(array_key_exists('email', $user->getErrors())){
-            echo ' Ok'. PHP_EOL;
+        if ($condition) {
+            echo ' Ok'.PHP_EOL;
         } else {
             echo ' Fail'.PHP_EOL;
             exit();
