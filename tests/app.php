@@ -5,9 +5,40 @@ use app\models\User;
 
 require(__DIR__.'/_bootstrap.php');
 
-$user = new User();
+class TestUser
+{
+    public function testValidateEmptyValues()
+    {
+        $user = new User();
 
-$user->username = 'Test';
-$user->email = 'test@mail.ru';
+        echo 'validate empty username and email';
 
-print_r($user->getAttributes());
+        if($user->validate() == false){
+            echo ' Ok'. PHP_EOL;
+        } else {
+            echo ' Fail'. PHP_EOL;
+            exit();
+        }
+
+        echo 'check empty username error';
+
+        if(array_key_exists('username', $user->getErrors())){
+            echo ' Ok'. PHP_EOL;
+        } else {
+            echo ' Fail'.PHP_EOL;
+            exit();
+        }
+
+        echo 'check empty email error';
+
+        if(array_key_exists('email', $user->getErrors())){
+            echo ' Ok'. PHP_EOL;
+        } else {
+            echo ' Fail'.PHP_EOL;
+            exit();
+        }
+    }
+}
+
+$test = new TestUser();
+$test->testValidateEmptyValues();
