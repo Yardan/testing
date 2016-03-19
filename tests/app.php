@@ -2,6 +2,7 @@
 namespace tests;
 
 use app\models\User;
+use Yii;
 
 require(__DIR__.'/_bootstrap.php');
 
@@ -11,10 +12,24 @@ class UserTest extends TestCase
     {
         parent::setUp();
 
-        User::deleteAll([
-            'username'  => 'TestUserName',
-            'email'     =>'test@email.com'
+        User::deleteAll();
+
+        Yii::$app->db->createCommand()->insert(User::tableName(), [
+            'username'  => 'user',
+            'email'     =>'user@email.com'
+        ])->execute();
+    }
+
+    public function testValidateExistedValues()
+    {
+        $user = new User([
+            'username'  => 'user',
+            'email'     =>'user@email.com'
         ]);
+
+        $this->assertFalse($user->validate(), 'model is not valid');
+        $this->assertArrayHasKey('username', $user->getErrors(), 'check username error');
+        $this->assertArrayHasKey('email', $user->getErrors(), 'check email error');
     }
 
     public function testSaveIntoDatabase()
