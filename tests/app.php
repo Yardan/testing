@@ -7,6 +7,26 @@ require(__DIR__.'/_bootstrap.php');
 
 class UserTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        User::deleteAll([
+            'username'  => 'TestUserName',
+            'email'     =>'test@email.com'
+        ]);
+    }
+
+    public function testSaveIntoDatabase()
+    {
+        $user = new User([
+            'username'  => 'TestUserName',
+            'email'     =>'test@email.com'
+        ]);
+
+        $this->assertTrue($user->save(), 'model is saved');
+    }
+
     public function testValidateEmptyValues()
     {
         $user = new User();
@@ -49,7 +69,9 @@ foreach ($class->getMethods() as $method) {
          * $var TestCase $test
          */
         $test = new $method->class;
+        $test->setUp();
         $test->{$method->name}();
+        $test->tearDown();
         echo PHP_EOL;
     }
 
