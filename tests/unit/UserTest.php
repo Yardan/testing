@@ -2,10 +2,9 @@
 namespace tests\unit;
 
 use Yii;
-use tests\TestCase;
 use app\models\User;
 
-class UserTest extends TestCase
+class UserTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
