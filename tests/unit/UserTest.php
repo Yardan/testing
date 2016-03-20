@@ -17,18 +17,6 @@ class UserTest extends \PHPUnit_Extensions_Database_TestCase
         return $this->createXMLDataSet(dirname(__FILE__).'/../_data/users.xml');
     }
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        User::deleteAll();
-
-        Yii::$app->db->createCommand()->insert(User::tableName(), [
-            'username'  => 'user',
-            'email'     =>'user@email.com'
-        ])->execute();
-    }
-
     public function testValidateExistedValues()
     {
         $user = new User([
