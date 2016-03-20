@@ -4,8 +4,19 @@ namespace tests\unit;
 use Yii;
 use app\models\User;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends \PHPUnit_Extensions_Database_TestCase
 {
+    public function getConnection()
+    {
+        $pdo = new \PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        return $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+    }
+
+    public function getDataSet()
+    {
+        return $this->createXMLDataSet(dirname(__FILE__).'/../_data/users.xml');
+    }
+
     public function setUp()
     {
         parent::setUp();
