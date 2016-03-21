@@ -1,4 +1,11 @@
 # testing
+
+1. clone project
+2. edit config/db.php (correct db path)
+3. run "./yii migrate"  in root and in test/bin directory
+4. run "phpunit"
+
+
 Unit test practice
 
 For your convenience it woild be better to install phpunit globally:
