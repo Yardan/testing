@@ -1,12 +1,16 @@
 <?php
 namespace tests\unit;
 
+use Codeception\Specify;
 use Yii;
 use app\models\User;
 use Codeception\TestCase\Test;
 
 class UserTest extends Test
 {
+
+    use Specify;
+
     /**
      * @var \UnitTester
      */
@@ -31,9 +35,14 @@ class UserTest extends Test
             'username'  => 'user',
             'email'     =>'user@email.com'
         ]);
-        $this->assertFalse($user->validate(), 'model is not valid');
+
+        expect('model is not valid', $user->validate())->false();
+        expect('username has error', $user->getErrors())->hasKey('username');
+        expect('email has error', $user->getErrors())->hasKey('email');
+
+        /*$this->assertFalse($user->validate(), 'model is not valid');
         $this->assertArrayHasKey('username', $user->getErrors(), 'check username error');
-        $this->assertArrayHasKey('email', $user->getErrors(), 'check email error');
+        $this->assertArrayHasKey('email', $user->getErrors(), 'check email error');*/
     }
 
     public function testSaveIntoDatabase()
