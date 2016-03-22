@@ -1,19 +1,28 @@
 <?php
 namespace tests\unit;
+
 use Yii;
 use app\models\User;
+use Codeception\TestCase\Test;
 
-class UserTest extends \PHPUnit_Extensions_Database_TestCase
+class UserTest extends Test
 {
-    public function getConnection()
+    /**
+     * @var \UnitTester
+     */
+    protected $tester;
+
+    protected function _before()
     {
-        $pdo = new \PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
-        return $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+        User::deleteAll();
+        Yii::$app->db->createCommand()->insert(User::tableName(), [
+            'username'  => 'user',
+            'email'     =>'user@email.com'
+        ])->execute();
     }
 
-    public function getDataSet()
+    protected function _after()
     {
-        return $this->createXMLDataSet(dirname(__FILE__).'/../_data/users.xml');
     }
 
     public function testValidateExistedValues()
