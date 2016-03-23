@@ -18,11 +18,6 @@ class UserTest extends Test
 
     protected function _before()
     {
-        User::deleteAll();
-        Yii::$app->db->createCommand()->insert(User::tableName(), [
-            'username'  => 'user',
-            'email'     =>'user@email.com'
-        ])->execute();
     }
 
     protected function _after()
