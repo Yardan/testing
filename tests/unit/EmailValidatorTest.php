@@ -26,11 +26,11 @@ class EmailValidatorTest extends Test
     public function getEmailVariants()
     {
         return [
-            ['mail@site.com', true],
-            ['mail.dot@site.com', true],
-            ['mail_site.com', false],
-            ['mail@site', false],
-            ['mail@123', false],
+            'first' => ['mail@site.com', true],
+            'second' => ['mail.dot@site.com', true],
+            'third' => ['mail_site.com', false],
+            'forth' => ['mail@site', false],
+            'fifth' => ['mail@123', false],
         ];
     }
 
