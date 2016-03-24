@@ -3,7 +3,9 @@
         "yiisoft/yii2": "^2.0",
 	"phpunit/phpunit": "~4.8",
 	"phpunit/dbunit": "~1.3.2",
-        "codeception/verify": "*"
+        "codeception/verify": "*",
+        "codeception/codeception": "2.0.*",
+        "codeception/specify": "*"
     },
     "require-dev": {
         "yiisoft/yii2-gii": "^2.0"

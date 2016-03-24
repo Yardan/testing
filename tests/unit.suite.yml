@@ -6,7 +6,7 @@ class_name: UnitTester
 modules:
     enabled:
         - Asserts
-        - \Helper\Unit
+        - UnitHelper
         - Db
     config:
         Db:
